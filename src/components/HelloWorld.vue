@@ -41,11 +41,22 @@
 
     <div class="col sm-1">
       <div class="form-group">
-       <label for="paperSelects1">มื้ออาหาร</label>
+       <label for="paperSelects1">มื้อ</label>
         <select id="paperSelects1">
           <option value="1">3</option>
           <option value="2">4</option>
           <option value="3">5</option>
+        </select>
+      </div>
+    </div>
+
+     <div class="col sm-1">
+      <div class="form-group">
+       <label for="paperSelects1">วัน</label>
+        <select id="paperSelects1">
+          <option value="1">3</option>
+          <option value="2">5</option>
+          <option value="3">7</option>
         </select>
       </div>
     </div>
@@ -55,7 +66,7 @@
     <div class="col sm-6">
       <div class="form-group">
         <label for="paperInputs2">ที่อยู่จัดส่ง</label>
-        <textarea id="large-input" placeholder="ที่อยู่จัดส่ง จังหวัด, อำเภอ, ตำบล และ รหัสไปรษณีย์" style="width:100%;height:30%"></textarea>
+        <textarea  v-model="message" id="large-input" placeholder="ที่อยู่จัดส่ง จังหวัด, อำเภอ, ตำบล และ รหัสไปรษณีย์" style="width:100%;height:30%"/>
       </div>
     </div>
     <div class="col sm-3">
@@ -75,9 +86,20 @@
     </div>
   </div>
 
-  <div class="row flex-center">
-  <div class="col-4 col">
-    <button class="paper-btn btn-primary-outline">สั่งซื้ออาหาร</button>
+
+ <div class="row flex-spaces child-borders">
+  <label class="paper-btn margin" for="modal-1">สั่งซื้ออาหาร !</label>
+</div>
+<input class="modal-state" id="modal-1" type="checkbox">
+<div class="modal">
+  <label class="modal-bg" for="modal-1"></label>
+  <div class="modal-body">
+    <label class="btn-close" for="modal-1">X</label>
+    <h4 class="modal-title">Confirm order</h4>
+    <h5 class="modal-subtitle">ยืนยันคำสั่งซื้อ</h5>
+    <p>Address is: {{ address }}</p>
+    <p class="modal-text">This is an example of modal which is implemented with pure CSS! :D</p>
+    <label for="modal-1">Nice!</label>
   </div>
 </div>
 
@@ -88,6 +110,18 @@
 <script>
 export default {
   name: 'HelloWorld',
+   data :function(){
+        return {
+            address:'ตำแหน่ง',
+        }
+    },
+   methods :{
+      formSubmit(e){
+            console.log("Hello")
+            this.$emit('formSubmit',this.address)
+            e.preventDefault();
+        }
+   },
   props: {
     msg: String
   }
@@ -109,5 +143,10 @@ li {
 }
 a {
   color: #42b983;
+}
+.center-block {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
 }
 </style>
